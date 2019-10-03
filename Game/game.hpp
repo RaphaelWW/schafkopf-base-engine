@@ -30,7 +30,7 @@ struct GameResult {
 	int points;
 };
 
-enum GameType{
+enum GameType {
 	None, Sauspiel
 };
 
@@ -39,7 +39,7 @@ typedef std::vector<Card> Stich;
 class GameSession {
 
 public:
-	GameSession(std::vector<Card> handCards[4], bool simulation);
+	GameSession(std::vector<Card>* handCards, bool simulation);
 	virtual ~GameSession();
 	virtual std::vector<Card> getPossible(std::vector<Card> handCards) = 0;
 	void revertCard();
@@ -49,33 +49,79 @@ public:
 	GameResult getResult();
 
 protected:
+	std::vector<Card> findAllTrumpf(std::vector<Card> cards);
+	std::vector<Card> findAllInFarbe(std::vector<Card> cards, Farbe farbe);
+
 	std::vector<Card> m_openCards;
 	int m_points[4];
 
 private:
 	void eval();
 	void revertStich();
-	virtual int determineStichWinner(std::vector<Card> cards) = 0;
+	int determineStichWinner(std::vector<Card> cards);
+	int determineHighestTrumpf(std::vector<Card> cards);
+	virtual bool isTrumpf(Card card) = 0;
+	virtual bool isCardHigherTrumpf(Card card1, Card card2) = 0;
 	virtual bool* determineGameWinner() = 0;
 	virtual int getWinnerPoints() = 0;
 
 	std::vector<Stich> m_history;
 	std::vector<int> m_starter;
 	int m_currentRound;
-	std::vector<Card> m_handCards[4];
+	std::vector<Card>* m_handCards;
 	const bool m_simulation;
 };
 
-class Herzsolo: public GameSession {
+class HerzsoloSession: public GameSession {
 
 public:
-	Herzsolo(std::vector<Card> handCards[4], bool simulation);
+	HerzsoloSession(std::vector<Card>* handCards, bool simulation);
 	std::vector<Card> getPossible(std::vector<Card> handCards);
 
 private:
-	int determineStichWinner(std::vector<Card> cards);
+	bool isTrumpf(Card card);
+	bool isCardHigherTrumpf(Card card1, Card card2);
 	bool* determineGameWinner();
 	int getWinnerPoints();
+};
+
+class SauspielSession: public GameSession {
+
+public:
+	SauspielSession(std::vector<Card>* handCards, Farbe farbe, bool simulation);
+	std::vector<Card> getPossible(std::vector<Card> handCards);
+
+private:
+	bool isTrumpf(Card card);
+	bool isCardHigherTrumpf(Card card1, Card card2);
+	bool* determineGameWinner();
+	int getWinnerPoints();
+
+	Farbe m_farbe;
+};
+
+struct Spiel {
+	GameType type;
+	Farbe farbe;
+};
+
+struct CommonKnowledge {
+	std::vector<Card> last;
+	std::vector<Card> current;
+	int startPlayer;
+	int spieler;
+	Spiel spiel;
+};
+
+struct GameSituation {
+	std::vector<Card>* handCards;
+	CommonKnowledge* common;
+};
+
+class Player {
+public:
+	virtual Spiel vote(GameSituation sit) = 0;
+	virtual void placeCard(GameSituation sit) = 0;
 };
 
 #endif /* GAME_HPP_ */

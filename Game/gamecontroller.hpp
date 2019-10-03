@@ -17,13 +17,17 @@ using namespace std;
 
 class GameController {
 public:
-	GameController(int startPlayer);
-	void vote(int player, GameType plays);
+	GameController();
+	void registerPlayer(Player* player);
+	void initGame();
 
 private:
-	GameType m_vote[4];
-	GameType m_game;
-	int m_startPlayer, m_nVotes, m_spieler;
+	void createGameSituations(CommonKnowledge* common);
+
+	vector<Player*> m_players;
+	vector<Card> m_handCards[4];
+	GameSituation situations[4];
+	int m_startPlayer;
 };
 
 #endif /* GAME_GAMECONTROLLER_HPP_ */

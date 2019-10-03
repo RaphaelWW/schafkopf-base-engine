@@ -5,19 +5,21 @@
  *      Author: raphael
  */
 
-#include "game.hpp"
 #include <cassert>
 #include <vector>
 #include <cstring>
+#include <algorithm>
 
+#include "game.hpp"
+
+int determineFarbstichWinner(std::vector<Card> cards);
+bool isCardHigherFarbe(Card card1, Card card2);
 int countStichPoints(std::vector<Card> stich);
 int lookupPoints(Schlag schlag);
 
-GameSession::GameSession(std::vector<Card> handCards[4], bool simulation) :
+GameSession::GameSession(std::vector<Card>* handCards, bool simulation) :
 		m_points { 0 }, m_currentRound(0), m_simulation(simulation) {
-	for (int i = 0; i < 4; i++) {
-		m_handCards[i] = handCards[i];
-	}
+	m_handCards = handCards;
 	m_starter.push_back(0);
 }
 
@@ -34,6 +36,69 @@ void GameSession::revertStich() {
 	m_points[winner] -= countStichPoints(m_openCards);
 	m_history.pop_back();
 	m_openCards.pop_back();
+}
+
+int GameSession::determineStichWinner(std::vector<Card> cards) {
+	int winningPlayer = determineHighestTrumpf(cards);
+	if (winningPlayer > -1) {
+		return winningPlayer;
+	}
+
+	return determineFarbstichWinner(cards);
+}
+
+//returns number of the player with the highest Trumpf, -1 if none played Trumpf
+int GameSession::determineHighestTrumpf(std::vector<Card> cards) {
+	Card highestTrumpf;
+	int winningPlayer = -1;
+
+	for (int i = 0; i < 4; i++) {
+		Card card = cards[i];
+
+		if (isTrumpf(card) && (winningPlayer == -1 || isCardHigherTrumpf(highestTrumpf, card))) {
+
+			highestTrumpf = card;
+			winningPlayer = i;
+		}
+	}
+
+	return winningPlayer;
+}
+
+int determineFarbstichWinner(std::vector<Card> cards) {
+	int winner = 0;
+	Card highestCard = cards[0];
+
+	for (int i = 1; i < 4; i++) {
+		Card card = cards[i];
+		if (isCardHigherFarbe(highestCard, card)) {
+			winner = i;
+			highestCard = cards[i];
+		}
+	}
+
+	return winner;
+}
+
+bool isCardHigherFarbe(Card card1, Card card2) {
+	return card1.farbe == card2.farbe && card1.schlag < card2.schlag;
+}
+
+std::vector<Card> GameSession::findAllTrumpf(std::vector<Card> cards) {
+	std::vector<Card> trumpf;
+	for(Card card : cards){
+		if(isTrumpf(card)){
+			trumpf.push_back(card);
+		}
+	}
+	return trumpf;
+}
+
+std::vector<Card> GameSession::findAllInFarbe(std::vector<Card> cards, Farbe farbe) {
+	std::vector<Card> cardsInFarbe;
+	std::copy_if(cards.begin(), cards.end(), std::back_inserter(cardsInFarbe),
+			[farbe](Card card) {return card.farbe == farbe;});
+	return cardsInFarbe;
 }
 
 void GameSession::revertCard() {

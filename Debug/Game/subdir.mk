@@ -6,19 +6,22 @@
 CPP_SRCS += \
 ../Game/gamecontroller.cpp \
 ../Game/gamesession.cpp \
-../Game/herzsolo.cpp \
+../Game/herzsolosession.cpp \
+../Game/sauspielsession.cpp \
 ../Game/shuffler.cpp 
 
 OBJS += \
 ./Game/gamecontroller.o \
 ./Game/gamesession.o \
-./Game/herzsolo.o \
+./Game/herzsolosession.o \
+./Game/sauspielsession.o \
 ./Game/shuffler.o 
 
 CPP_DEPS += \
 ./Game/gamecontroller.d \
 ./Game/gamesession.d \
-./Game/herzsolo.d \
+./Game/herzsolosession.d \
+./Game/sauspielsession.d \
 ./Game/shuffler.d 
 
 
