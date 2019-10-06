@@ -9,23 +9,17 @@
 
 #include "game.hpp"
 
-bool isTrumpf(Card card);
-int determineHighestTrumpf(std::vector<Card> cards);
-bool isCardHigherTrumpf(Card card1, Card card2);
-std::vector<Card> findAllTrumpf(std::vector<Card> cards);
-std::vector<Card> findAllInFarbe(std::vector<Card> cards, Farbe farbe);
-
-HerzsoloSession::HerzsoloSession(std::vector<Card>* handCards, bool simulation) :
-		GameSession(handCards, simulation) {
+HerzsoloSession::HerzsoloSession(std::vector<Card>* handCards, CommonKnowledge* common, bool simulation) :
+		GameSession(handCards, common, simulation) {
 }
 
 std::vector<Card> HerzsoloSession::getPossible(std::vector<Card> handCards) {
 
-	if(m_openCards.empty()){
+	if(getOpenCards().empty()){
 		return handCards;
 	}
 
-	Card firstCard = m_openCards.front();
+	Card firstCard = getOpenCards().front();
 	if (isTrumpf(firstCard)) {
 		std::vector<Card> trumpf = findAllTrumpf(handCards);
 		if (!trumpf.empty()) {
@@ -42,7 +36,7 @@ std::vector<Card> HerzsoloSession::getPossible(std::vector<Card> handCards) {
 }
 
 bool HerzsoloSession::isTrumpf(Card card) {
-	return card.farbe == HERZ || card.schlag == O || card.schlag == O;
+	return card.farbe == HERZ || card.schlag == O || card.schlag == U;
 }
 
 //is card2 higher Trumpf than card1, should only be called if both are Trumpf
@@ -62,7 +56,7 @@ bool HerzsoloSession::isCardHigherTrumpf(Card card1, Card card2) {
 
 bool* HerzsoloSession::determineGameWinner() {
 	bool* winner = new bool[4];
-	if (m_points[0] > 60) {
+	if (getPoints()[0] > 60) {
 		winner[0] = true;
 		winner[1] = false;
 		winner[2] = false;
@@ -74,12 +68,5 @@ bool* HerzsoloSession::determineGameWinner() {
 		winner[3] = true;
 	}
 	return winner;
-}
-
-int HerzsoloSession::getWinnerPoints() {
-	if (m_points[0] > 60) {
-		return m_points[0];
-	}
-	return 120 - m_points[0];
 }
 

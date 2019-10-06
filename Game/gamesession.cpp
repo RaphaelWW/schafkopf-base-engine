@@ -12,22 +12,25 @@
 
 #include "game.hpp"
 
+#include "../Exception/nosimulationexception.hpp"
+#include "../Exception/illegalcardexception.hpp"
+
 int determineFarbstichWinner(std::vector<Card> cards);
 bool isCardHigherFarbe(Card card1, Card card2);
 int countStichPoints(std::vector<Card> stich);
 int lookupPoints(Schlag schlag);
+void checkSimulation(bool simulation);
 
-GameSession::GameSession(std::vector<Card>* handCards, bool simulation) :
-		m_points { 0 }, m_currentRound(0), m_simulation(simulation) {
-	m_handCards = handCards;
-	m_starter.push_back(0);
+GameSession::GameSession(std::vector<Card>* handCards, CommonKnowledge* common, bool simulation) :
+		m_points { 0 }, m_currentRound(0), m_simulation(simulation), m_handCards(handCards), m_common(common) {
+	m_starter.push_back(common->startPlayer);
 }
 
 GameSession::~GameSession() {
 }
 
 void GameSession::revertStich() {
-	assert(m_simulation);
+	checkSimulation(m_simulation);
 	assert(m_currentRound > 0);
 	m_currentRound--;
 	int winner = m_starter.back();
@@ -86,8 +89,8 @@ bool isCardHigherFarbe(Card card1, Card card2) {
 
 std::vector<Card> GameSession::findAllTrumpf(std::vector<Card> cards) {
 	std::vector<Card> trumpf;
-	for(Card card : cards){
-		if(isTrumpf(card)){
+	for (Card card : cards) {
+		if (isTrumpf(card)) {
 			trumpf.push_back(card);
 		}
 	}
@@ -101,8 +104,20 @@ std::vector<Card> GameSession::findAllInFarbe(std::vector<Card> cards, Farbe far
 	return cardsInFarbe;
 }
 
+int GameSession::getSpieler() {
+	return m_common->spieler;
+}
+
+int* GameSession::getPoints() {
+	return m_points;
+}
+
+std::vector<Card> GameSession::getOpenCards() {
+	return m_openCards;
+}
+
 void GameSession::revertCard() {
-	assert(m_simulation);
+	checkSimulation(m_simulation);
 	if (m_openCards.empty()) {
 		revertStich();
 	} else {
@@ -110,11 +125,19 @@ void GameSession::revertCard() {
 	}
 }
 
-void GameSession::placeCard(int player, int card) {
+void GameSession::placeCard(int player, Card card) {
 	assert(8 - m_currentRound == (int ) m_handCards[player].size());
 	assert(!m_openCards.empty() || m_starter.back() == player);
-	m_openCards.push_back(m_handCards[player][card]);
-	m_handCards[player].erase(m_handCards[player].begin() + card);
+
+	vector<Card>::iterator placeInHand = find_if(m_handCards[player].begin(), m_handCards[player].end(),
+			[card](Card cardInHand) {return card.schlag==cardInHand.schlag && card.farbe==cardInHand.farbe;});
+	if(placeInHand==m_handCards[player].end()){
+		throw IllegalCardException(string("Player does not have played card."));
+	}
+
+	m_openCards.push_back(card);
+	m_handCards[player].erase(placeInHand);
+
 	if (m_openCards.size() == 4) {
 		eval();
 	}
@@ -139,6 +162,7 @@ void GameSession::eval() {
 }
 
 int GameSession::getPlayerNextTurn() {
+	checkSimulation(m_simulation);
 	if (m_starter.empty()) {
 		return 0;
 	}
@@ -181,5 +205,22 @@ int lookupPoints(Schlag schlag) {
 	default:
 		return 0;
 	}
+}
+
+void checkSimulation(bool simulation) {
+	if (!simulation) {
+		throw NoSimulationException();
+	}
+}
+
+int GameSession::getWinnerPoints() {
+	bool* winner = determineGameWinner();
+	int sum = 0;
+	for (int i = 0; i < 4; i++) {
+		if (winner[i]) {
+			sum += m_points[i];
+		}
+	}
+	return sum;
 }
 

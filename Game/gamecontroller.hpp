@@ -19,12 +19,13 @@ class GameController {
 public:
 	GameController();
 	void registerPlayer(Player* player);
-	void initGame();
 
 private:
 	void createGameSituations(CommonKnowledge* common);
+	void initGame();
+	int playRound(CommonKnowledge* common, GameSession* session, int startPlayer);
 
-	vector<Player*> m_players;
+	Player* m_players[4];
 	vector<Card> m_handCards[4];
 	GameSituation situations[4];
 	int m_startPlayer;
