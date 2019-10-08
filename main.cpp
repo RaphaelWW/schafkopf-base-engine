@@ -5,19 +5,14 @@
  *      Author: raphael
  */
 
-#include "Game/game.hpp"
-#include "SimulationTree/treebuilder.hpp"
-#include "Game/shuffler.hpp"
-
-#include <vector>
-#include <cstdint>
-#include <cstring>
-#include <iostream>
-
-#define OPTIONS_P1 735471
-#define OPTIONS_P2 12870
+#include "Game/randomplayer.hpp"
+#include "Game/gamecontroller.hpp"
 
 int main() {
-	return 0;
+	GameController controller;
+	for (int i = 0; i < 4; i++) {
+		controller.registerPlayer(new RandomPlayer());
+	}
+	controller.initGame();
 }
 

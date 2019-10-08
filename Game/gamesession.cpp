@@ -20,6 +20,7 @@ bool isCardHigherFarbe(Card card1, Card card2);
 int countStichPoints(std::vector<Card> stich);
 int lookupPoints(Schlag schlag);
 void checkSimulation(bool simulation);
+void updateCommon(CommonKnowledge* common, std::vector<Card> last, std::vector<Card> current);
 
 GameSession::GameSession(std::vector<Card>* handCards, CommonKnowledge* common, bool simulation) :
 		m_points { 0 }, m_currentRound(0), m_simulation(simulation), m_handCards(handCards), m_common(common) {
@@ -131,7 +132,7 @@ void GameSession::placeCard(int player, Card card) {
 
 	vector<Card>::iterator placeInHand = find_if(m_handCards[player].begin(), m_handCards[player].end(),
 			[card](Card cardInHand) {return card.schlag==cardInHand.schlag && card.farbe==cardInHand.farbe;});
-	if(placeInHand==m_handCards[player].end()){
+	if (placeInHand == m_handCards[player].end()) {
 		throw IllegalCardException(string("Player does not have played card."));
 	}
 
@@ -141,6 +142,8 @@ void GameSession::placeCard(int player, Card card) {
 	if (m_openCards.size() == 4) {
 		eval();
 	}
+
+	updateCommon(m_common, m_openCards, m_history.back());
 }
 
 void GameSession::placeCardSimulation(Card card) {
@@ -222,5 +225,10 @@ int GameSession::getWinnerPoints() {
 		}
 	}
 	return sum;
+}
+
+void updateCommon(CommonKnowledge* common, std::vector<Card> last, std::vector<Card> current) {
+	common->current = current;
+	common->last = last;
 }
 

@@ -1,12 +1,8 @@
-main.o: ../main.cpp ../Game/game.hpp ../SimulationTree/treebuilder.hpp \
- ../SimulationTree/../Game/game.hpp ../Game/shuffler.hpp ../Game/game.hpp
+main.o: ../main.cpp ../Game/randomplayer.hpp ../Game/game.hpp \
+ ../Game/gamecontroller.hpp
+
+../Game/randomplayer.hpp:
 
 ../Game/game.hpp:
 
-../SimulationTree/treebuilder.hpp:
-
-../SimulationTree/../Game/game.hpp:
-
-../Game/shuffler.hpp:
-
-../Game/game.hpp:
+../Game/gamecontroller.hpp:

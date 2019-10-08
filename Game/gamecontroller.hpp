@@ -19,10 +19,10 @@ class GameController {
 public:
 	GameController();
 	void registerPlayer(Player* player);
+	void initGame();
 
 private:
 	void createGameSituations(CommonKnowledge* common);
-	void initGame();
 	int playRound(CommonKnowledge* common, GameSession* session, int startPlayer);
 
 	Player* m_players[4];

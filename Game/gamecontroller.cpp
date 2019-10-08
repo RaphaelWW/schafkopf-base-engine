@@ -30,9 +30,6 @@ void GameController::registerPlayer(Player* player) {
 	} else {
 		throw RegistrationException(string("4 players are already registered."));
 	}
-	if (nRegistered == 4) {
-		initGame();
-	}
 }
 
 void GameController::initGame() {
@@ -50,10 +47,11 @@ void GameController::initGame() {
 	}
 
 	GameSession* session = mapGameTypeToGameSession(&common, m_handCards);
-	int roundStartPlayer = m_startPlayer;
 	for (int i = 0; i < 8; i++) {
-		roundStartPlayer = playRound(&common, session, roundStartPlayer);
+		common.startPlayer = playRound(&common, session, common.startPlayer);
 	}
+
+	m_startPlayer = (m_startPlayer + 1) % 4;
 }
 
 int GameController::playRound(CommonKnowledge* common, GameSession* session, int startPlayer) {
@@ -62,6 +60,7 @@ int GameController::playRound(CommonKnowledge* common, GameSession* session, int
 		Card card = m_players[turn]->placeCard(session->getPossible(m_handCards[turn]));
 		session->placeCard(turn, card);
 	}
+	return session->getPlayerNextTurn();
 }
 
 void GameController::createGameSituations(CommonKnowledge* common) {

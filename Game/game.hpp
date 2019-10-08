@@ -124,7 +124,7 @@ private:
 
 class Player {
 public:
-	virtual ~Player();
+	virtual ~Player(){};
 	virtual Spiel vote(GameSituation sit) = 0;
 	virtual Card placeCard(std::vector<Card> possibleCards) = 0;
 };
