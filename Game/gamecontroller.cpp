@@ -32,7 +32,7 @@ void GameController::registerPlayer(Player* player) {
 	}
 }
 
-void GameController::initGame() {
+GameResult GameController::initGame() {
 	CommonKnowledge common;
 	common.startPlayer = m_startPlayer;
 	common.spiel.type = None;
@@ -52,6 +52,7 @@ void GameController::initGame() {
 	}
 
 	m_startPlayer = (m_startPlayer + 1) % 4;
+	return session->getResult();
 }
 
 int GameController::playRound(CommonKnowledge* common, GameSession* session, int startPlayer) {

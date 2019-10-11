@@ -15,7 +15,7 @@ HerzsoloSession::HerzsoloSession(std::vector<Card>* handCards, CommonKnowledge* 
 
 std::vector<Card> HerzsoloSession::getPossible(std::vector<Card> handCards) {
 
-	if(getOpenCards().empty()){
+	if (getOpenCards().empty()) {
 		return handCards;
 	}
 
@@ -49,6 +49,8 @@ bool HerzsoloSession::isCardHigherTrumpf(Card card1, Card card2) {
 		}
 	} else if (card1.schlag == U) {
 		return card2.schlag == O || (card2.schlag == U && card1.farbe < card2.farbe);
+	} else if (card2.schlag == O || card2.schlag == U) {
+		return true;
 	} else {
 		return card1.schlag < card2.schlag;
 	}

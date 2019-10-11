@@ -5,6 +5,8 @@
  *      Author: raphael
  */
 
+#include <iostream>
+
 #include "Game/randomplayer.hpp"
 #include "Game/gamecontroller.hpp"
 
@@ -13,6 +15,11 @@ int main() {
 	for (int i = 0; i < 4; i++) {
 		controller.registerPlayer(new RandomPlayer());
 	}
-	controller.initGame();
+	GameResult result = controller.initGame();
+	for (int i = 0; i < 4; i++) {
+		if (result.winner[i]) {
+			std::cout << "Player " << i << " wins with " << result.points << "." << std::endl;
+		}
+	}
 }
 

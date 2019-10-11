@@ -101,7 +101,7 @@ std::vector<Card> GameSession::findAllTrumpf(std::vector<Card> cards) {
 std::vector<Card> GameSession::findAllInFarbe(std::vector<Card> cards, Farbe farbe) {
 	std::vector<Card> cardsInFarbe;
 	std::copy_if(cards.begin(), cards.end(), std::back_inserter(cardsInFarbe),
-			[farbe](Card card) {return card.farbe == farbe;});
+			[farbe, this](Card card) {return card.farbe == farbe && !this->isTrumpf(card);});
 	return cardsInFarbe;
 }
 
@@ -143,7 +143,11 @@ void GameSession::placeCard(int player, Card card) {
 		eval();
 	}
 
-	updateCommon(m_common, m_openCards, m_history.back());
+	if (m_history.size() == 0) {
+		updateCommon(m_common, m_openCards, std::vector<Card>());
+	} else {
+		updateCommon(m_common, m_openCards, m_history.back());
+	}
 }
 
 void GameSession::placeCardSimulation(Card card) {
@@ -165,7 +169,6 @@ void GameSession::eval() {
 }
 
 int GameSession::getPlayerNextTurn() {
-	checkSimulation(m_simulation);
 	if (m_starter.empty()) {
 		return 0;
 	}
@@ -199,6 +202,8 @@ int lookupPoints(Schlag schlag) {
 	switch (schlag) {
 	case A:
 		return 11;
+	case ZEHN:
+		return 10;
 	case K:
 		return 4;
 	case O:
@@ -224,6 +229,7 @@ int GameSession::getWinnerPoints() {
 			sum += m_points[i];
 		}
 	}
+	delete winner;
 	return sum;
 }
 

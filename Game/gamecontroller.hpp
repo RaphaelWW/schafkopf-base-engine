@@ -19,7 +19,7 @@ class GameController {
 public:
 	GameController();
 	void registerPlayer(Player* player);
-	void initGame();
+	GameResult initGame();
 
 private:
 	void createGameSituations(CommonKnowledge* common);
