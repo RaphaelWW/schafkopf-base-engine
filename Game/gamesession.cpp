@@ -144,9 +144,9 @@ void GameSession::placeCard(int player, Card card) {
 	}
 
 	if (m_history.size() == 0) {
-		updateCommon(m_common, m_openCards, std::vector<Card>());
+		updateCommon(m_common, std::vector<Card>(), m_openCards);
 	} else {
-		updateCommon(m_common, m_openCards, m_history.back());
+		updateCommon(m_common, m_history.back(), m_openCards);
 	}
 }
 

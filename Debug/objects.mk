@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS :=
+LIBS := -lboost_system -lcrypto -lcpprest -lssl
 
