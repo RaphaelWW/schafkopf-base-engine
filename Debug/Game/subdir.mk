@@ -8,30 +8,30 @@ CPP_SRCS += \
 ../Game/gamecontroller.cpp \
 ../Game/gamesession.cpp \
 ../Game/herzsolosession.cpp \
-../Game/httpplayer.cpp \
 ../Game/randomplayer.cpp \
 ../Game/sauspielsession.cpp \
-../Game/shuffler.cpp 
+../Game/shuffler.cpp \
+../Game/tcpplayer.cpp 
 
 OBJS += \
 ./Game/consoleplayer.o \
 ./Game/gamecontroller.o \
 ./Game/gamesession.o \
 ./Game/herzsolosession.o \
-./Game/httpplayer.o \
 ./Game/randomplayer.o \
 ./Game/sauspielsession.o \
-./Game/shuffler.o 
+./Game/shuffler.o \
+./Game/tcpplayer.o 
 
 CPP_DEPS += \
 ./Game/consoleplayer.d \
 ./Game/gamecontroller.d \
 ./Game/gamesession.d \
 ./Game/herzsolosession.d \
-./Game/httpplayer.d \
 ./Game/randomplayer.d \
 ./Game/sauspielsession.d \
-./Game/shuffler.d 
+./Game/shuffler.d \
+./Game/tcpplayer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

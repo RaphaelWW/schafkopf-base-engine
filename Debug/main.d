@@ -1,10 +1,10 @@
 main.o: ../main.cpp ../Game/randomplayer.hpp ../Game/game.hpp \
- ../Game/httpplayer.cpp ../Game/gamecontroller.hpp
+ ../Game/gamecontroller.hpp ../Game/tcpplayer.cpp
 
 ../Game/randomplayer.hpp:
 
 ../Game/game.hpp:
 
-../Game/httpplayer.cpp:
-
 ../Game/gamecontroller.hpp:
+
+../Game/tcpplayer.cpp:
