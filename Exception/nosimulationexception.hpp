@@ -10,14 +10,14 @@
 
 
 #include <exception>
-#include <string.h>
+#include <string>
 
 using namespace std;
 
 class NoSimulationException: public exception {
 public:
 	char * what() {
-		return "Cannot execute because this is not a simulation.";
+		return strdup("Cannot execute because this is not a simulation.");
 	}
 };
 

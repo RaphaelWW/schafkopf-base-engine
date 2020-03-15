@@ -66,13 +66,15 @@ public:
 	void placeCardSimulation(Card card);
 	int getPlayerNextTurn();
 	GameResult getResult();
+	int getTeamPointsLastStich(int player);
+	static int countStichPoints(Stich stich);
 
 protected:
 	std::vector<Card> findAllTrumpf(std::vector<Card> cards);
 	std::vector<Card> findAllInFarbe(std::vector<Card> cards, Farbe farbe);
 	int getSpieler();
-	int* getPoints();
 	std::vector<Card> getOpenCards();
+	int m_points[4];
 
 
 private:
@@ -84,9 +86,9 @@ private:
 	virtual bool isCardHigherTrumpf(Card card1, Card card2) = 0;
 	virtual bool* determineGameWinner() = 0;
 	int getWinnerPoints();
+	virtual bool isSameTeam(int player1, int player2) = 0;
 
 	std::vector<Card> m_openCards;
-	int m_points[4];
 	std::vector<Stich> m_history;
 	std::vector<int> m_starter;
 	int m_currentRound;
@@ -105,6 +107,7 @@ private:
 	bool isTrumpf(Card card);
 	bool isCardHigherTrumpf(Card card1, Card card2);
 	bool* determineGameWinner();
+	virtual bool isSameTeam(int player1, int player2);
 };
 
 class SauspielSession: public GameSession {
@@ -117,6 +120,7 @@ private:
 	bool isTrumpf(Card card);
 	bool isCardHigherTrumpf(Card card1, Card card2);
 	bool* determineGameWinner();
+	virtual bool isSameTeam(int player1, int player2);
 
 	Farbe m_farbe;
 	int m_mitspieler;
@@ -127,6 +131,7 @@ public:
 	virtual ~Player(){};
 	virtual Spiel vote(GameSituation sit) = 0;
 	virtual Card placeCard(std::vector<Card> possibleCards) = 0;
+	virtual void notifyEnd(){}
 };
 
 #endif /* GAME_HPP_ */

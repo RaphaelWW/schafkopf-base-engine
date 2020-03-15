@@ -16,7 +16,7 @@ int main() {
 	for (int i = 0; i < 3; i++) {
 		controller.registerPlayer(new RandomPlayer());
 	}
-	controller.registerPlayer(new TcpPlayer("127.0.0.1", 8080));
+	controller.registerPlayer(new TcpPlayer("127.0.0.1", 8080, &controller, 4));
 	GameResult result = controller.initGame();
 	for (int i = 0; i < 4; i++) {
 		if (result.winner[i]) {

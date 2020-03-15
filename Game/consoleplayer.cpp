@@ -35,6 +35,7 @@ Spiel ConsolePlayer::vote(GameSituation sit) {
 		break;
 	case 'n':
 		spiel.type = None;
+		break;
 	default:
 		invalid_argument("Other value than 'y' or 'n' entered");
 	}

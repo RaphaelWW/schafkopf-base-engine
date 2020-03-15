@@ -15,7 +15,6 @@
 void serializeCard(Card card, uint8_t* byte_repr);
 void serializeSpiel(Spiel spiel, uint8_t* byte_repr);
 void serializeOpenCards(vector<Card> cards, uint8_t* byte_repr);
-void serializeHandCards(vector<Card> cards, uint8_t* byte_repr);
 void serializeCardVector(vector<Card> cards, uint8_t* byte_repr, int maxNumCards);
 void serializeCommonKnowledge(CommonKnowledge common, uint8_t* byte_repr);
 
@@ -66,6 +65,7 @@ Spiel deserializeSpiel(char* msg) {
 	Spiel spiel;
 	spiel.type = (GameType) (uint8_t) msg[0];
 	spiel.farbe = (Farbe) (uint8_t) msg[1];
+	return spiel;
 }
 
 #endif

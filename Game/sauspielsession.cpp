@@ -111,7 +111,7 @@ bool SauspielSession::isCardHigherTrumpf(Card card1, Card card2) {
 
 bool* SauspielSession::determineGameWinner() {
 	bool* winner = new bool[4];
-	int spielerPoints = getPoints()[getSpieler()] + getPoints()[m_mitspieler];
+	int spielerPoints = m_points[getSpieler()] + m_points[m_mitspieler];
 	if (spielerPoints > 60) {
 		winner[0] = false;
 		winner[1] = false;
@@ -128,4 +128,17 @@ bool* SauspielSession::determineGameWinner() {
 		winner[m_mitspieler] = false;
 	}
 	return winner;
+}
+
+bool SauspielSession::isSameTeam(int player1, int player2) {
+	if (player1 == player2) {
+		return true;
+	}
+	if (player1 == getSpieler()) {
+		return player2 == m_mitspieler;
+	}
+	if (player2 == getSpieler()) {
+		return player1 == m_mitspieler;
+	}
+	return player1 != m_mitspieler && player2 != m_mitspieler;
 }

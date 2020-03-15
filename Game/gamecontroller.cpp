@@ -19,7 +19,7 @@ using namespace std;
 GameSession* mapGameTypeToGameSession(CommonKnowledge* common, vector<Card>* handCards);
 
 GameController::GameController() :
-		m_startPlayer(0) {
+		m_startPlayer(0), m_currentSession(NULL) {
 }
 
 void GameController::registerPlayer(Player* player) {
@@ -46,13 +46,14 @@ GameResult GameController::initGame() {
 		}
 	}
 
-	GameSession* session = mapGameTypeToGameSession(&common, m_handCards);
+	m_currentSession = mapGameTypeToGameSession(&common, m_handCards);
 	for (int i = 0; i < 8; i++) {
-		common.startPlayer = playRound(&common, session, common.startPlayer);
+		common.startPlayer = playRound(&common, m_currentSession, common.startPlayer);
 	}
 
 	m_startPlayer = (m_startPlayer + 1) % 4;
-	return session->getResult();
+	notifyEnd();
+	return m_currentSession->getResult();
 }
 
 int GameController::playRound(CommonKnowledge* common, GameSession* session, int startPlayer) {
@@ -83,6 +84,16 @@ GameSession* mapGameTypeToGameSession(CommonKnowledge* common, vector<Card>* han
 		return new SauspielSession(handCards, common, false);
 	default:
 		throw GameStartException(string("Game type is not known"));
+	}
+}
+
+GameSession* GameController::getCurrentGameSession(){
+	return m_currentSession;
+}
+
+void GameController::notifyEnd(){
+	for(int i=0;i<4;i++){
+		m_players[i]->notifyEnd();
 	}
 }
 

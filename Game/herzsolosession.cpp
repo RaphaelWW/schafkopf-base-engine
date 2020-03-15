@@ -58,7 +58,7 @@ bool HerzsoloSession::isCardHigherTrumpf(Card card1, Card card2) {
 
 bool* HerzsoloSession::determineGameWinner() {
 	bool* winner = new bool[4];
-	if (getPoints()[0] > 60) {
+	if (m_points[0] > 60) {
 		winner[0] = true;
 		winner[1] = false;
 		winner[2] = false;
@@ -70,5 +70,15 @@ bool* HerzsoloSession::determineGameWinner() {
 		winner[3] = true;
 	}
 	return winner;
+}
+
+bool HerzsoloSession::isSameTeam(int player1, int player2) {
+	if (player1 == player2) {
+		return true;
+	}
+	if (player1 == getSpieler()){
+		return false;
+	}
+	return true;
 }
 

@@ -24,6 +24,7 @@ using namespace std;
 
 void serializeGameSituation(GameSituation sit, uint8_t* byte_repr);
 Spiel deserializeSpiel(char* msg);
+void serializeHandCards(vector<Card> cards, uint8_t* byte_repr);
 
 #endif
 

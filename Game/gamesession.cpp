@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstring>
 #include <algorithm>
+#include <stdexcept>
 
 #include "game.hpp"
 
@@ -17,7 +18,6 @@
 
 int determineFarbstichWinner(std::vector<Card> cards);
 bool isCardHigherFarbe(Card card1, Card card2);
-int countStichPoints(std::vector<Card> stich);
 int lookupPoints(Schlag schlag);
 void checkSimulation(bool simulation);
 void updateCommon(CommonKnowledge* common, std::vector<Card> last, std::vector<Card> current);
@@ -109,10 +109,6 @@ int GameSession::getSpieler() {
 	return m_common->spieler;
 }
 
-int* GameSession::getPoints() {
-	return m_points;
-}
-
 std::vector<Card> GameSession::getOpenCards() {
 	return m_openCards;
 }
@@ -190,7 +186,7 @@ GameResult GameSession::getResult() {
 	return result;
 }
 
-int countStichPoints(Stich stich) {
+int GameSession::countStichPoints(Stich stich) {
 	int sum = 0;
 	for (Card card : stich) {
 		sum += lookupPoints(card.schlag);
@@ -236,5 +232,15 @@ int GameSession::getWinnerPoints() {
 void updateCommon(CommonKnowledge* common, std::vector<Card> last, std::vector<Card> current) {
 	common->current = current;
 	common->last = last;
+}
+
+int GameSession::getTeamPointsLastStich(int player){
+	if(!m_history.size()){
+		throw runtime_error("Trying to get points of last Stich in first round");
+	}
+	if(isSameTeam(m_starter.back(), player)){
+		return countStichPoints(m_history.back());
+	}
+	return 0;
 }
 
