@@ -7,9 +7,11 @@ CPP_SRCS += \
 ../Game/consoleplayer.cpp \
 ../Game/gamecontroller.cpp \
 ../Game/gamesession.cpp \
+../Game/gametype.cpp \
 ../Game/herzsolosession.cpp \
 ../Game/randomplayer.cpp \
 ../Game/sauspielsession.cpp \
+../Game/serialize.cpp \
 ../Game/shuffler.cpp \
 ../Game/tcpplayer.cpp 
 
@@ -17,9 +19,11 @@ OBJS += \
 ./Game/consoleplayer.o \
 ./Game/gamecontroller.o \
 ./Game/gamesession.o \
+./Game/gametype.o \
 ./Game/herzsolosession.o \
 ./Game/randomplayer.o \
 ./Game/sauspielsession.o \
+./Game/serialize.o \
 ./Game/shuffler.o \
 ./Game/tcpplayer.o 
 
@@ -27,9 +31,11 @@ CPP_DEPS += \
 ./Game/consoleplayer.d \
 ./Game/gamecontroller.d \
 ./Game/gamesession.d \
+./Game/gametype.d \
 ./Game/herzsolosession.d \
 ./Game/randomplayer.d \
 ./Game/sauspielsession.d \
+./Game/serialize.d \
 ./Game/shuffler.d \
 ./Game/tcpplayer.d 
 

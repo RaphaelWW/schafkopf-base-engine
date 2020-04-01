@@ -16,7 +16,7 @@ using namespace std;
 
 class RandomPlayer: public Player{
 public:
-	Spiel vote(GameSituation sit);
+	Spiel vote(GameSituation sit, vector<Spiel> possibleVotes);
 	Card placeCard(vector<Card> possibleCards);
 };
 

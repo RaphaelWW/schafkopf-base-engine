@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "game.hpp"
+#include <stdexcept>
 
 HerzsoloSession::HerzsoloSession(std::vector<Card>* handCards, CommonKnowledge* common, bool simulation) :
 		GameSession(handCards, common, simulation) {

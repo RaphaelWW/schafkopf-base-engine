@@ -30,13 +30,12 @@ struct GameResult {
 	int points;
 };
 
-enum GameType {
+enum GameTypeName {
 	None, Sauspiel
 };
 
-
 struct Spiel {
-	GameType type;
+	GameTypeName type;
 	Farbe farbe;
 };
 
@@ -76,7 +75,6 @@ protected:
 	std::vector<Card> getOpenCards();
 	int m_points[4];
 
-
 private:
 	void eval();
 	void revertStich();
@@ -107,7 +105,7 @@ private:
 	bool isTrumpf(Card card);
 	bool isCardHigherTrumpf(Card card1, Card card2);
 	bool* determineGameWinner();
-	virtual bool isSameTeam(int player1, int player2);
+	bool isSameTeam(int player1, int player2);
 };
 
 class SauspielSession: public GameSession {
@@ -120,7 +118,8 @@ private:
 	bool isTrumpf(Card card);
 	bool isCardHigherTrumpf(Card card1, Card card2);
 	bool* determineGameWinner();
-	virtual bool isSameTeam(int player1, int player2);
+	bool isSameTeam(int player1, int player2);
+	bool isPossible(std::vector<Card> handCards);
 
 	Farbe m_farbe;
 	int m_mitspieler;
@@ -128,10 +127,13 @@ private:
 
 class Player {
 public:
-	virtual ~Player(){};
-	virtual Spiel vote(GameSituation sit) = 0;
+	virtual ~Player() {
+	}
+	;
+	virtual Spiel vote(GameSituation sit, std::vector<Spiel> possibleVotes) = 0;
 	virtual Card placeCard(std::vector<Card> possibleCards) = 0;
-	virtual void notifyEnd(){}
+	virtual void notifyEnd() {
+	}
 };
 
 #endif /* GAME_HPP_ */

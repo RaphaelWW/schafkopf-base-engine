@@ -15,16 +15,16 @@ using namespace std;
 
 class IllegalGameException: public exception {
 public:
-	IllegalGameException(string msg) :
+	IllegalGameException(const char* msg) :
 			m_msg(msg) {
 	}
 
 	char * what() {
-		return strdup(m_msg.c_str());
+		return strdup(m_msg);
 	}
 
 private:
-	string m_msg;
+	const char* m_msg;
 };
 
 #endif /* EXCEPTION_ILLEGALGAMEEXCEPTION_HPP_ */

@@ -18,7 +18,7 @@ void printCards(vector<Card> cards, string msg);
 void printCard(Card card);
 Farbe enterSauspielFarbe();
 
-Spiel ConsolePlayer::vote(GameSituation sit) {
+Spiel ConsolePlayer::vote(GameSituation sit, vector<Spiel> possibleVotes) {
 	m_spielAnnounced = false;
 	m_sit = sit;
 	printCards(*sit.handCards, string("Deine Karten"));

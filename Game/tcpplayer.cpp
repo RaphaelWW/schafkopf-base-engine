@@ -29,7 +29,7 @@ using namespace std;
 
 class TcpPlayer: public Player {
 public:
-	Spiel vote(GameSituation sit) {
+	Spiel vote(GameSituation sit, vector<Spiel> possibleVotes) {
 		m_sit = sit;
 		send(m_sockfd, CMD_VOTE, CMD_SIZE, 0);
 		sendGameSituation();

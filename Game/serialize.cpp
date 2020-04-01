@@ -63,7 +63,7 @@ void serializeSpiel(Spiel spiel, uint8_t* byte_repr) {
 
 Spiel deserializeSpiel(char* msg) {
 	Spiel spiel;
-	spiel.type = (GameType) (uint8_t) msg[0];
+	spiel.type = (GameTypeName) (uint8_t) msg[0];
 	spiel.farbe = (Farbe) (uint8_t) msg[1];
 	return spiel;
 }

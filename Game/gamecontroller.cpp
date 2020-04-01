@@ -6,10 +6,12 @@
  */
 #include <string>
 #include <vector>
+#include <cstring>
 
 #include "game.hpp"
 #include "gamecontroller.hpp"
 #include "shuffler.hpp"
+#include "gametype.hpp"
 
 #include "../Exception/gamestartexception.hpp"
 #include "../Exception/registrationexception.hpp"
@@ -17,6 +19,7 @@
 using namespace std;
 
 GameSession* mapGameTypeToGameSession(CommonKnowledge* common, vector<Card>* handCards);
+vector<Spiel> getPossibleVotes(vector<Card> handCards);
 
 GameController::GameController() :
 		m_startPlayer(0), m_currentSession(NULL) {
@@ -39,14 +42,24 @@ GameResult GameController::initGame() {
 	createGameSituations(&common);
 
 	for (int i = 0; i < 4; i++) {
-		Spiel vote = m_players[i]->vote(situations[i]);
+		int playerTurn = (common.startPlayer + i) % 4;
+		Spiel vote = m_players[playerTurn]->vote(situations[playerTurn], getPossibleVotes(m_handCards[playerTurn]));
 		if (vote.type == Sauspiel && common.spiel.type == None) {
-			common.spieler = i;
+			common.spieler = playerTurn;
 			common.spiel = vote;
 		}
 	}
 
-	m_currentSession = mapGameTypeToGameSession(&common, m_handCards);
+	try {
+		m_currentSession = mapGameTypeToGameSession(&common, m_handCards);
+	} catch (GameStartException*) {
+		GameResult result;
+		result.isFinished = false;
+		result.points = 0;
+		bool winners[] = {false,false,false,false};
+		memcpy(result.winner, winners, 4);
+		return result;
+	}
 	for (int i = 0; i < 8; i++) {
 		common.startPlayer = playRound(&common, m_currentSession, common.startPlayer);
 	}
@@ -77,23 +90,33 @@ void GameController::createGameSituations(CommonKnowledge* common) {
 
 GameSession* mapGameTypeToGameSession(CommonKnowledge* common, vector<Card>* handCards) {
 	if (common->spiel.type == None) {
-		throw GameStartException(string("No game decision was met."));
+		throw new GameStartException(string("No game decision was met."));
 	}
 	switch (common->spiel.type) {
 	case Sauspiel:
 		return new SauspielSession(handCards, common, false);
 	default:
-		throw GameStartException(string("Game type is not known"));
+		throw new GameStartException(string("Game type is not known"));
 	}
 }
 
-GameSession* GameController::getCurrentGameSession(){
+GameSession* GameController::getCurrentGameSession() {
 	return m_currentSession;
 }
 
-void GameController::notifyEnd(){
-	for(int i=0;i<4;i++){
+void GameController::notifyEnd() {
+	for (int i = 0; i < 4; i++) {
 		m_players[i]->notifyEnd();
 	}
+}
+
+vector<Spiel> getPossibleVotes(vector<Card> handCards) {
+	vector<Spiel> possibles;
+	for (GameTypeName name = None; name <= Sauspiel; name = (GameTypeName) ((int) name + 1)) {
+		GameType* gameType = GameType::gameTypeFromName(name);
+		vector<Spiel> newPossibles = gameType->getPossibleVariants(handCards);
+		possibles.insert(possibles.end(), newPossibles.begin(), newPossibles.end());
+	}
+	return possibles;
 }
 

@@ -14,7 +14,7 @@ using namespace std;
 
 class ConsolePlayer: public Player{
 public:
-	Spiel vote(GameSituation sit);
+	Spiel vote(GameSituation sit, vector<Spiel> possibleVotes);
 	Card placeCard(vector<Card> possibleCards);
 
 private:

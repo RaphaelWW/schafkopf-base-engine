@@ -21,7 +21,7 @@ SauspielSession::SauspielSession(vector<Card>* handCards, CommonKnowledge* commo
 
 	m_mitspieler = findMitspieler(handCards, m_farbe);
 	if (m_mitspieler == common->spieler) {
-		throw IllegalGameException(string("Player initiated Sauspiel with himself."));
+		throw IllegalGameException("Player initiated Sauspiel with himself.");
 	}
 }
 
@@ -62,7 +62,7 @@ vector<Card> SauspielSession::getPossible(vector<Card> handCards) {
 	}
 
 	if (containsSpielsau(handCards, m_farbe)) {
-		//Wenn die Sau angespielt wird, muss sie gelegt werden.
+		// Wenn die Sau angespielt wird, muss sie gelegt werden.
 		if (firstCard.farbe == m_farbe) {
 			vector<Card> onlySau;
 			Card card;
@@ -70,8 +70,10 @@ vector<Card> SauspielSession::getPossible(vector<Card> handCards) {
 			card.farbe = m_farbe;
 			onlySau.push_back(card);
 			return onlySau;
-		} else {
-			//Wenn die Sau nicht angespielt wird, darf sie nicht gelegt werden.
+		}
+		// Wenn die Sau nicht angespielt wird und noch mehr als 2 Karten auf der Hand sind,
+		// darf sie nicht gelegt werden.
+		else if(handCards.size() > 2){
 			for (unsigned int i = 0; i < handCards.size(); i++) {
 				if (handCards[i].schlag == A && handCards[i].farbe == m_farbe) {
 					handCards.erase(handCards.begin() + i);

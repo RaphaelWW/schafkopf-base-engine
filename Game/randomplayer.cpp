@@ -12,15 +12,11 @@
 
 using namespace std;
 
-Spiel RandomPlayer::vote(GameSituation sit) {
-	Spiel spiel;
-	if (rand() >= RAND_MAX / 2) {
-		spiel.type = Sauspiel;
-		spiel.farbe = EICHEL;
-	} else {
-		spiel.type = None;
+Spiel RandomPlayer::vote(GameSituation sit, vector<Spiel> possibleVotes) {
+	if (possibleVotes.size() > 1 && rand() >= RAND_MAX / 2) {
+		return possibleVotes[1];
 	}
-	return spiel;
+	return possibleVotes[0];
 }
 
 Card RandomPlayer::placeCard(vector<Card> possibleCards) {
