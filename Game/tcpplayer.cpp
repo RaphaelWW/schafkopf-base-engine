@@ -17,6 +17,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <stdexcept>
+#include <random>
 
 #define CMD_SIZE 4
 #define CMD_RESULT "RSLT"
@@ -36,7 +37,8 @@ public:
 
 		char buffer[SPIEL_SIZE];
 		read(m_sockfd, buffer, SPIEL_SIZE);
-		return deserializeSpiel(buffer);
+		//return deserializeSpiel(buffer);
+		return possibleVotes[rand() % possibleVotes.size()];
 	}
 
 	Card placeCard(vector<Card> possibleCards) {
