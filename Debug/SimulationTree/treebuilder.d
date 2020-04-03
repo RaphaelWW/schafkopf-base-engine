@@ -1,9 +1,10 @@
 SimulationTree/treebuilder.o: ../SimulationTree/treebuilder.cpp \
- ../SimulationTree/../Game/gamesession.hpp \
- ../SimulationTree/../Game/game.hpp ../SimulationTree/treebuilder.hpp
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/SimulationTree/treebuilder.hpp
 
-../SimulationTree/../Game/gamesession.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp:
 
-../SimulationTree/../Game/game.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:
 
-../SimulationTree/treebuilder.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/SimulationTree/treebuilder.hpp:

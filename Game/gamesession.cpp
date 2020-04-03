@@ -11,10 +11,10 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include "gamesession.hpp"
+#include "Game/gamesession.hpp"
 
-#include "../Exception/nosimulationexception.hpp"
-#include "../Exception/illegalcardexception.hpp"
+#include "Exception/nosimulationexception.hpp"
+#include "Exception/illegalcardexception.hpp"
 
 int determineFarbstichWinner(std::vector<Card> cards);
 bool isCardHigherFarbe(Card card1, Card card2);

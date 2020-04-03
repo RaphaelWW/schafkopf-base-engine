@@ -5,9 +5,9 @@
  *      Author: raphael
  */
 
-#include "gametype.hpp"
+#include "Game/gametype.hpp"
 #include <stdexcept>
-#include "helper.hpp"
+#include "Game/helper.hpp"
 
 using namespace std;
 

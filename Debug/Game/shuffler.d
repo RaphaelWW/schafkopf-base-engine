@@ -1,6 +1,7 @@
-Game/shuffler.o: ../Game/shuffler.cpp ../Game/shuffler.hpp \
- ../Game/game.hpp
+Game/shuffler.o: ../Game/shuffler.cpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/shuffler.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp
 
-../Game/shuffler.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/shuffler.hpp:
 
-../Game/game.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:

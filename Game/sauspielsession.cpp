@@ -8,8 +8,8 @@
 #include <vector>
 #include <algorithm>
 
-#include "gamesession.hpp"
-#include "../Exception/illegalgameexception.hpp"
+#include "Game/gamesession.hpp"
+#include "Exception/illegalgameexception.hpp"
 
 using namespace std;
 

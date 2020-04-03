@@ -7,7 +7,7 @@
 #ifndef HELPER_HPP_
 #define HELPER_HPP_
 
-#include "game.hpp"
+#include "Game/game.hpp"
 
 #include <vector>
 #include <algorithm>

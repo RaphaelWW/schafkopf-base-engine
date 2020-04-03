@@ -1,18 +1,22 @@
-Game/gamecontroller.o: ../Game/gamecontroller.cpp ../Game/gamesession.hpp \
- ../Game/game.hpp ../Game/gamecontroller.hpp ../Game/shuffler.hpp \
- ../Game/gametype.hpp ../Game/../Exception/gamestartexception.hpp \
- ../Game/../Exception/registrationexception.hpp
+Game/gamecontroller.o: ../Game/gamecontroller.cpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamecontroller.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/shuffler.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gametype.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Exception/gamestartexception.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Exception/registrationexception.hpp
 
-../Game/gamesession.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp:
 
-../Game/game.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:
 
-../Game/gamecontroller.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamecontroller.hpp:
 
-../Game/shuffler.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/shuffler.hpp:
 
-../Game/gametype.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gametype.hpp:
 
-../Game/../Exception/gamestartexception.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Exception/gamestartexception.hpp:
 
-../Game/../Exception/registrationexception.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Exception/registrationexception.hpp:

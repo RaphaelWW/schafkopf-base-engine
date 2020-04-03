@@ -9,8 +9,8 @@
 #include <algorithm>
 #include <iostream>
 
-#include "../Game/gamesession.hpp"
-#include "treebuilder.hpp"
+#include "Game/gamesession.hpp"
+#include "SimulationTree/treebuilder.hpp"
 
 bool operator==(const Card card1, const Card card2);
 void removeCardFromOptions(std::vector<Card> possibleCards[4], Card toRemove, int idxRemoved[4]);

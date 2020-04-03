@@ -7,7 +7,7 @@
 
 #include <vector>
 
-#include "gamesession.hpp"
+#include "Game/gamesession.hpp"
 #include <stdexcept>
 
 HerzsoloSession::HerzsoloSession(std::vector<Card>* handCards, CommonKnowledge* common, bool simulation) :

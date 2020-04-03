@@ -1,9 +1,10 @@
 Game/sauspielsession.o: ../Game/sauspielsession.cpp \
- ../Game/gamesession.hpp ../Game/game.hpp \
- ../Game/../Exception/illegalgameexception.hpp
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Exception/illegalgameexception.hpp
 
-../Game/gamesession.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp:
 
-../Game/game.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:
 
-../Game/../Exception/illegalgameexception.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Exception/illegalgameexception.hpp:

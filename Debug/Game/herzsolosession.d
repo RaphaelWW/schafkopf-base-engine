@@ -1,6 +1,7 @@
 Game/herzsolosession.o: ../Game/herzsolosession.cpp \
- ../Game/gamesession.hpp ../Game/game.hpp
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp
 
-../Game/gamesession.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp:
 
-../Game/game.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:

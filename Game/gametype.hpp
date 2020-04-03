@@ -8,7 +8,7 @@
 #ifndef GAME_GAMETYPE_HPP_
 #define GAME_GAMETYPE_HPP_
 
-#include "game.hpp"
+#include "Game/game.hpp"
 
 #include <vector>
 

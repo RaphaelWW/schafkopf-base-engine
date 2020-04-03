@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "game.hpp"
+#include "Game/game.hpp"
 
 using namespace std;
 

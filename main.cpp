@@ -7,10 +7,10 @@
 
 #include <iostream>
 
-#include "Game/randomplayer.hpp"
+#include "Game/Player/randomplayer.hpp"
 #include "Game/gamecontroller.hpp"
-#include "Game/tcpplayer.cpp"
-#include "Game/consoleplayer.hpp"
+#include "Game/Player/tcpplayer.cpp"
+#include "Game/Player/consoleplayer.hpp"
 
 int main() {
 	int wins[4] = { 0 };

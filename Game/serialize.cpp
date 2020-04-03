@@ -8,7 +8,7 @@
 #ifndef GAME_SERIALIZE_CPP_
 #define GAME_SERIALIZE_CPP_
 
-#include "serialize.hpp"
+#include "Game/serialize.hpp"
 
 #include <cstring>
 

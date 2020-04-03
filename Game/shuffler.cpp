@@ -7,7 +7,7 @@
 
 #include <cstdlib>
 
-#include"shuffler.hpp"
+#include"Game/shuffler.hpp"
 
 Shuffler::Shuffler() {
 	for (int farbe = SCHELLEN; farbe <= EICHEL; farbe++) {

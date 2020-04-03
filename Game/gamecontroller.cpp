@@ -8,13 +8,13 @@
 #include <vector>
 #include <cstring>
 
-#include "gamesession.hpp"
-#include "gamecontroller.hpp"
-#include "shuffler.hpp"
-#include "gametype.hpp"
+#include "Game/gamesession.hpp"
+#include "Game/gamecontroller.hpp"
+#include "Game/shuffler.hpp"
+#include "Game/gametype.hpp"
 
-#include "../Exception/gamestartexception.hpp"
-#include "../Exception/registrationexception.hpp"
+#include "Exception/gamestartexception.hpp"
+#include "Exception/registrationexception.hpp"
 
 using namespace std;
 

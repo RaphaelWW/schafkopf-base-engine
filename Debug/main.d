@@ -1,22 +1,27 @@
-main.o: ../main.cpp ../Game/randomplayer.hpp ../Game/game.hpp \
- ../Game/gamecontroller.hpp ../Game/gamesession.hpp ../Game/tcpplayer.cpp \
- ../Game/serialize.hpp ../Game/../Exception/illegalcardexception.hpp \
- ../Game/gamecontroller.hpp ../Game/consoleplayer.hpp
+main.o: ../main.cpp ../Game/Player/randomplayer.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp \
+ ../Game/gamecontroller.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp \
+ ../Game/Player/tcpplayer.cpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/serialize.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Exception//illegalcardexception.hpp \
+ /home/raphael/eclipse-workspace/Schafkopf/Game/gamecontroller.hpp \
+ ../Game/Player/consoleplayer.hpp
 
-../Game/randomplayer.hpp:
+../Game/Player/randomplayer.hpp:
 
-../Game/game.hpp:
-
-../Game/gamecontroller.hpp:
-
-../Game/gamesession.hpp:
-
-../Game/tcpplayer.cpp:
-
-../Game/serialize.hpp:
-
-../Game/../Exception/illegalcardexception.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/game.hpp:
 
 ../Game/gamecontroller.hpp:
 
-../Game/consoleplayer.hpp:
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamesession.hpp:
+
+../Game/Player/tcpplayer.cpp:
+
+/home/raphael/eclipse-workspace/Schafkopf/Game/serialize.hpp:
+
+/home/raphael/eclipse-workspace/Schafkopf/Exception//illegalcardexception.hpp:
+
+/home/raphael/eclipse-workspace/Schafkopf/Game/gamecontroller.hpp:
+
+../Game/Player/consoleplayer.hpp:

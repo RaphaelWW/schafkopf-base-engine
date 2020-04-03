@@ -11,7 +11,7 @@
 #include <vector>
 #include <optional>
 
-#include "gamesession.hpp"
+#include "Game/gamesession.hpp"
 
 using namespace std;
 

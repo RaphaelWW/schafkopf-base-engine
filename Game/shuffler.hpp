@@ -8,17 +8,19 @@
 #ifndef SHUFFLER_HPP_
 #define SHUFFLER_HPP_
 
-#include "game.hpp"
+#include "Game/game.hpp"
 #include <vector>
+
+using namespace std;
 
 class Shuffler {
 public:
 	Shuffler();
-	std::vector<Card> provideCards(const int cardSelection[8]);
-	std::vector<Card> provideCards();
+	vector<Card> provideCards(const int cardSelection[8]);
+	vector<Card> provideCards();
 
 private:
-	std::vector<Card> m_availableCards;
+	vector<Card> m_availableCards;
 };
 
 #endif /* SHUFFLER_HPP_ */
