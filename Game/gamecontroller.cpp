@@ -8,7 +8,7 @@
 #include <vector>
 #include <cstring>
 
-#include "game.hpp"
+#include "gamesession.hpp"
 #include "gamecontroller.hpp"
 #include "shuffler.hpp"
 #include "gametype.hpp"

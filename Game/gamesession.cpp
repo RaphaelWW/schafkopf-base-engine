@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include "game.hpp"
+#include "gamesession.hpp"
 
 #include "../Exception/nosimulationexception.hpp"
 #include "../Exception/illegalcardexception.hpp"

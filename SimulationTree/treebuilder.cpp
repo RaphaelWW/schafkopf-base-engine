@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iostream>
 
-#include "../Game/game.hpp"
+#include "../Game/gamesession.hpp"
 #include "treebuilder.hpp"
 
 bool operator==(const Card card1, const Card card2);

@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include "../Game/game.hpp"
+#include "../Game/gamesession.hpp"
 
 class TreeBuilder {
 public:
